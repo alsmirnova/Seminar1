@@ -4,21 +4,21 @@ import java.util.Iterator;
 
 public class LinkedStack<Item> implements IStack<Item> {
 
-    private Node<Item> head;
+     private Node<Item> head;
     private int size;
 
     @Override
     public void push(Item item) {
         /* TODO: implement it */
-        head.next = head;
-        head.item = item;
+
+        head = new Node(item, head);
         size++;
     }
 
     @Override
     public Item pop() {
         /* TODO: implement it */
-        if (size>0) {
+        if (size > 0) {
             head = head.next;
             size--;
         }
@@ -47,17 +47,19 @@ public class LinkedStack<Item> implements IStack<Item> {
         @Override
         public boolean hasNext() {
             /* TODO: implement it */
-           if (current!=null)  return true;
-               return false;
+            if (current != null) return true;
+            return false;
         }
 
         @Override
         public Item next() {
             /* TODO: implement it */
-          Item item = current.item;
-            current = current.next;
-            return item;
-        }
+            if (size!=0) {
+                Item item = current.item;
+                current = current.next;
+                return item;
+            }
+        return null;}
 
     }
 
